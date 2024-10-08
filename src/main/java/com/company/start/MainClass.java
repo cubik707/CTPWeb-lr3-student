@@ -159,7 +159,7 @@ public class MainClass {
     public void searchStudentByName() {
         Scanner insert = new Scanner(System.in);
         System.out.println("Enter Student Name");
-        String name = insert.next();
+        String name = insert.nextLine();
         action.searchByName(name);
     }
 

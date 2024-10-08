@@ -214,11 +214,28 @@ public class StudentDao {
 
         con = ConnectionFactory.getConnection();
         try {
-
+            String query = "SELECT * FROM student WHERE CONCAT(fname, ' ', lname) LIKE ?";
+            ps = con.prepareStatement(query);
+            ps.setString(1, name);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                Student student = new Student();
+                student.setId(rs.getLong("id"));
+                student.setFname(rs.getString("fname"));
+                student.setLname(rs.getString("lname"));
+                student.setAddress(rs.getString("address"));
+                student.setMobileNo(rs.getString("mobile_no"));
+                student.setMailId(rs.getString("email_id"));
+                student.setCity(rs.getString("city"));
+                student.setDesignation(rs.getString("designation"));
+                student.setDob(rs.getDate("dob"));
+                student.setDoj(rs.getDate("doj"));
+                student.setSalary(rs.getBigDecimal("salary"));
+                student.setAddDate(rs.getTimestamp("add_date"));
+                studentList.add(student);
+            }
             // Найти студентов по Имени
             // Модернизируйте метод. С возможностью искать и по имени и по фамилии с помощью слова like
-
-
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -273,13 +290,28 @@ public class StudentDao {
 
         con = ConnectionFactory.getConnection();
         try {
-
-
-
+            String query = "SELECT * FROM student WHERE salary BETWEEN ? AND ?";
+            ps = con.prepareStatement(query);
+            ps.setBigDecimal(1, lowerSalary);
+            ps.setBigDecimal(2, higherSalary);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                Student student = new Student();
+                student.setId(rs.getLong("id"));
+                student.setFname(rs.getString("fname"));
+                student.setLname(rs.getString("lname"));
+                student.setAddress(rs.getString("address"));
+                student.setMobileNo(rs.getString("mobile_no"));
+                student.setMailId(rs.getString("email_id"));
+                student.setCity(rs.getString("city"));
+                student.setDesignation(rs.getString("designation"));
+                student.setDob(rs.getDate("dob"));
+                student.setDoj(rs.getDate("doj"));
+                student.setSalary(rs.getBigDecimal("salary"));
+                student.setAddDate(rs.getTimestamp("add_date"));
+                studentList.add(student);
+            }
             // Найти студентов с ЗП в пределах От и До
-
-
-
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
