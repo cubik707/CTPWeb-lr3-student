@@ -1,7 +1,7 @@
 package com.company.model;
 
 import java.sql.Timestamp;
-import java.util.Date;
+import java.sql.Date;
 
 public class Course {
     private long id;
