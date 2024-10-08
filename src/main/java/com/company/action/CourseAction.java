@@ -12,11 +12,20 @@ public class CourseAction {
     public void insert(Course course) {
         status = dao.insert(course);
         if (status == 1) {
-            System.out.println("Student Inserted Successfully");
+            System.out.println("Course Inserted Successfully");
         } else if (status == -1) {
-            System.out.println("Student Already exists");
+            System.out.println("Course Already exists");
         } else {
-            System.out.println("Unable to Insert Student");
+            System.out.println("Unable to Insert Course");
+        }
+    }
+
+    public void update(Course course) {
+        status = dao.update(course);
+        if (status == 1) {
+            System.out.println("Course Updated Successfully");
+        } else {
+            System.out.println("Unable to update Course");
         }
     }
 }
