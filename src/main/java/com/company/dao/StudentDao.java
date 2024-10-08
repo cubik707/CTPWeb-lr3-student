@@ -179,13 +179,24 @@ public class StudentDao {
         Student student = new Student();
         con = ConnectionFactory.getConnection();
         try {
-
-
-
-            // Найти студентов по Номеру телефона
-
-
-
+            String query = "select * from student where mobile_no=?";
+            ps = con.prepareStatement(query);
+            ps.setString(1, mobileNo);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                student.setId(rs.getLong("id"));
+                student.setFname(rs.getString("fname"));
+                student.setLname(rs.getString("lname"));
+                student.setAddress(rs.getString("address"));
+                student.setMobileNo(rs.getString("mobile_no"));
+                student.setMailId(rs.getString("email_id"));
+                student.setCity(rs.getString("city"));
+                student.setDesignation(rs.getString("designation"));
+                student.setDob(rs.getDate("dob"));
+                student.setDoj(rs.getDate("doj"));
+                student.setSalary(rs.getBigDecimal("salary"));
+                student.setAddDate(rs.getTimestamp("add_date"));
+            }
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
