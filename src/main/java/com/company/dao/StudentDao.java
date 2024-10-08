@@ -366,13 +366,28 @@ public class StudentDao {
 
         con = ConnectionFactory.getConnection();
         try {
-
-
+            String query = "SELECT * FROM student WHERE doj BETWEEN ? AND ?";
+            ps = con.prepareStatement(query);
+            ps.setDate(1, startDate);
+            ps.setDate(2, endDate);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                Student student = new Student();
+                student.setId(rs.getLong("id"));
+                student.setFname(rs.getString("fname"));
+                student.setLname(rs.getString("lname"));
+                student.setAddress(rs.getString("address"));
+                student.setMobileNo(rs.getString("mobile_no"));
+                student.setMailId(rs.getString("email_id"));
+                student.setCity(rs.getString("city"));
+                student.setDesignation(rs.getString("designation"));
+                student.setDob(rs.getDate("dob"));
+                student.setDoj(rs.getDate("doj"));
+                student.setSalary(rs.getBigDecimal("salary"));
+                student.setAddDate(rs.getTimestamp("add_date"));
+                studentList.add(student);
+            }
             // Найти студентов с датами От и До
-
-
-
-
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
