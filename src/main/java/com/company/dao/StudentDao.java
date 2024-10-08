@@ -405,11 +405,7 @@ public class StudentDao {
 
         con = ConnectionFactory.getConnection();
         try {
-
-            // Модернизируйте поиск - отсортировав от большего к меньшему по полю id
-
-
-            String query = "select * from student";
+            String query = "select * from student ORDER BY id DESC ";
             ps = con.prepareStatement(query);
             rs = ps.executeQuery();
             while (rs.next()) {
