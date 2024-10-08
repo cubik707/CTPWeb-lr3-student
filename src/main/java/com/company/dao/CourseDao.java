@@ -38,4 +38,30 @@ public class CourseDao {
         }
         return status;
     }
+
+    public int update(Course course) {
+        con = ConnectionFactory.getConnection();
+        try {
+            String query = "update student set course_name=?,teacher=?,start_date=?,end_date=?"
+                    + "where id=? ";
+            ps = con.prepareStatement(query);
+            ps.setString(1, course.getCourseName());
+            ps.setString(2, course.getTeacher());
+            ps.setDate(3, course.getStartDate());
+            ps.setDate(4, course.getEndDate());
+            ps.setLong(5, course.getId());
+            status = ps.executeUpdate();
+            System.out.println("updated course " + status);
+        } catch (Exception e) {
+            status = -2;
+            e.printStackTrace();
+        } finally {
+            try {
+                con.close();
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        }
+        return status;
+    }
 }
